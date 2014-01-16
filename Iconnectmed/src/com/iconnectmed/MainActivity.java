@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 	EditText editEmail;
 	EditText editPassword;
  
+	// test commment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
