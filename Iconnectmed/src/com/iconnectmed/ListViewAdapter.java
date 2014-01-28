@@ -50,7 +50,7 @@ public class ListViewAdapter extends BaseAdapter{
 		return position;
 	}
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
@@ -75,6 +75,15 @@ public class ListViewAdapter extends BaseAdapter{
             public void onClick(View arg0) {
             	
             	Log.d("ListViewAdapter", "clicked!!!!");
+            	
+             Intent intent = new Intent(context, ChatActivity.class);
+             
+            // intent.putExtra("chatUserEmail", userProfileList.get(position).getEmail());
+             
+             intent.putExtra("chatUserEmail", "testsk@test.com");
+             
+             context.startActivity(intent);
+            	
             	
 //                // Send single item click data to SingleItemView Class
 //                Intent intent = new Intent(context, SingleItemView.class);

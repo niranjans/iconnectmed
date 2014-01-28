@@ -38,51 +38,9 @@ public class UserListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_list);
 		
-		Pubnub pubnub = new Pubnub("pub-c-c2edd7e9-3cbe-4c38-a5f4-1f5ba16327b9", "sub-c-577af36a-7f07-11e3-89e2-02ee2ddab7fe");
+		getIntent().getStringExtra("name");
 		
-		try {
-			  pubnub.subscribe("hello_world", new Callback() {
 
-			      @Override
-			      public void connectCallback(String channel, Object message) {
-			          Log.d("PUBNUB","SUBSCRIBE : CONNECT on channel:" + channel
-			                     + " : " + message.getClass() + " : "
-			                     + message.toString());
-			      }
-
-			      @Override
-			      public void disconnectCallback(String channel, Object message) {
-			          Log.d("PUBNUB","SUBSCRIBE : DISCONNECT on channel:" + channel
-			                     + " : " + message.getClass() + " : "
-			                     + message.toString());
-			      }
-
-			      public void reconnectCallback(String channel, Object message) {
-			          Log.d("PUBNUB","SUBSCRIBE : RECONNECT on channel:" + channel
-			                     + " : " + message.getClass() + " : "
-			                     + message.toString());
-			      }
-
-			      @Override
-			      public void successCallback(String channel, Object message) {
-			          Log.d("PUBNUB","SUBSCRIBE : " + channel + " : "
-			                     + message.getClass() + " : " + message.toString());
-			          
-  			    	
-  			    	Toast.makeText(getApplicationContext(), message.getClass() + " : " + message.toString(), 
-  			    			   Toast.LENGTH_LONG).show();	
-			      }
-
-			      @Override
-			      public void errorCallback(String channel, PubnubError error) {
-			          Log.d("PUBNUB","SUBSCRIBE : ERROR on channel " + channel
-			                     + " : " + error.toString());
-			      }
-			    }
-			  );
-			} catch (PubnubException e) {
-			  Log.d("PUBNUB",e.toString());
-			}
 		
 		 new RemoteDataTask().execute();
 		
@@ -123,6 +81,7 @@ public class UserListActivity extends Activity {
                     map.setLastName((String) userProfile.get("lastName"));
                     map.setDepartment((String) userProfile.get("department"));
                     map.setUser(userProfile.getParseUser("user"));
+                    //map.setEmail(userProfile.getParseUser("user").getEmail());
                     
                     userProfileList.add(map);
 
@@ -144,7 +103,7 @@ public class UserListActivity extends Activity {
             // Binds the Adapter to the ListView
             listview.setAdapter(adapter);
             // Close the progressdialog
-            mProgressDialog.dismiss();
+            mProgressDialog.dismiss(); 
         }
     }
 
@@ -152,6 +111,8 @@ public class UserListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
 		menu.add("Logout");
+		menu.add("Chat");
+
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.user_list, menu);
 		return true;
@@ -163,13 +124,30 @@ public class UserListActivity extends Activity {
          switch(item.getItemId())
          {
              case 0:
-             		// Logout the user
-            	 	ParseUser.logOut();
-            	 	
-            	 	Intent intent = new Intent(UserListActivity.this, LoginActivity.class);
-    		    	startActivity(intent);
+            	 
+            	// Logout the user
+          	 	ParseUser.logOut();
+          	 	
+          	 	Intent intent2 = new Intent(UserListActivity.this, ChatActivity.class);
+          	 	
+          	 	// For testing. fix later
+          	 	intent2.putExtra("chatUserEmail", "nir7@gmail.com");
+          	 	
+  		    	startActivity(intent2);
+          	 	
+
             	 	
                    return true;
+             case 1:
+            	 
+   		    	
+          		// Logout the user
+         	 	ParseUser.logOut();
+         	 	
+         	 	Intent intent = new Intent(UserListActivity.this, LoginActivity.class);
+ 		    	startActivity(intent);
+          		
+                return true;
              default:
                    return super.onOptionsItemSelected(item);
          }

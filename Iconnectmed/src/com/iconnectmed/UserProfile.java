@@ -8,6 +8,15 @@ public class UserProfile {
 	private String LastName;
 	private String department;
 	private ParseUser user;
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	private String email;
 
 	
 	public ParseUser getUser() {
