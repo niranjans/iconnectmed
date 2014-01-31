@@ -27,20 +27,38 @@ public class UserListActivity extends Activity {
 	
 	// Declare Variables
     ListView listview;
-    List<ParseObject> ob;
+    List<ParseUser> ob;
     ProgressDialog mProgressDialog;
     ListViewAdapter adapter;
     private List<UserProfile> userProfileList = null;
+    
+    ParseUser currentUser;
  
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_list);
+				
+		currentUser = ParseUser.getCurrentUser();
 		
-		getIntent().getStringExtra("name");
+		// ---------------------------------------------------------------------- 
+		// Check if service is running.
 		
-
+		if(!MessageService.isMessageServiceRunning()){
+			
+			// Start the service
+	        // registerReceiver(messageReceiver, messageFilter);
+			
+			Log.d("UserListActivity", "Starting message service");
+			
+	        Intent messageservice = new Intent(this, MessageService.class);
+	        messageservice.putExtra("channel", currentUser.getUsername());
+	        startService(messageservice);
+			
+		}
+		
+		// ----------------------------------------------------------------------
 		
 		 new RemoteDataTask().execute();
 		
@@ -68,10 +86,17 @@ public class UserListActivity extends Activity {
             // Create the array
         	userProfileList = new ArrayList<UserProfile>();
             try {
+            	
+            	
+            	
                 // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("UserProfile");
-                
-                // by ascending
+               ParseQuery<ParseUser> query = ParseUser.getQuery();
+               
+               Log.d("UserListActivity", "In asynctask.. username - " + currentUser.getUsername());
+               
+               query.whereNotEqualTo("username", currentUser.getUsername());
+               
+                // by ascending LastName
                 query.orderByAscending("lastName");
                 ob = query.find();
                 for (ParseObject userProfile : ob) {
@@ -80,8 +105,7 @@ public class UserListActivity extends Activity {
                     map.setFirstName((String) userProfile.get("firstName"));
                     map.setLastName((String) userProfile.get("lastName"));
                     map.setDepartment((String) userProfile.get("department"));
-                    map.setUser(userProfile.getParseUser("user"));
-                    //map.setEmail(userProfile.getParseUser("user").getEmail());
+                    map.setUsername((String) userProfile.get("username"));
                     
                     userProfileList.add(map);
 

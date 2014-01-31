@@ -57,4 +57,13 @@
         android:layout_alignParentRight="true"
         android:text="Signup" />
 
+    <Button
+        android:id="@+id/buttonAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonLogin"
+        android:layout_marginTop="19dp"
+        android:layout_toLeftOf="@+id/buttonLogin"
+        android:text="Button" />
+
 </RelativeLayout>

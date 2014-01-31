@@ -122,7 +122,9 @@ public class ChatActivity extends Activity {
 		    @Override
 		    public void onClick(View v) {
 		    	
-		    	pubnub.publish(getIntent().getStringExtra("chatUserEmail"), 
+		    	Log.d("ChatActivity", "Sending chat to username - " + getIntent().getStringExtra("chatUsername"));
+		    	
+		    	pubnub.publish(getIntent().getStringExtra("chatUsername"), 
 		    			editChat.getText().toString() , callback);
 		    	
 

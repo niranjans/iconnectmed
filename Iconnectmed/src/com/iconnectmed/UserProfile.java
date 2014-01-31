@@ -7,7 +7,16 @@ public class UserProfile {
 	private String firstName;
 	private String LastName;
 	private String department;
-	private ParseUser user;
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	private String username;
+
 	
 	public String getEmail() {
 		return email;
@@ -18,13 +27,7 @@ public class UserProfile {
 
 	private String email;
 
-	
-	public ParseUser getUser() {
-		return user;
-	}
-	public void setUser(ParseUser user) {
-		this.user = user;
-	}
+
 	
 	public String getFirstName() {
 		return firstName;

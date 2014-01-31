@@ -39,15 +39,13 @@ public class ProfileActivity extends Activity {
 		    public void onClick(View v) {
 		    	
 		    	ParseUser user = ParseUser.getCurrentUser();
-		    	
-		    	
-		    	// Make a new profile
-		    	ParseObject profile = new ParseObject("UserProfile");
-		    	profile.put("firstName", editFirstName.getText().toString());
-		    	profile.put("lastName", editLastName.getText().toString());
-		    	profile.put("department", spinnerDepartments.getSelectedItem().toString());
-		    	profile.put("user", user);
-		    	profile.saveInBackground();
+
+		    	user.put("firstName", editFirstName.getText().toString());
+		    	user.put("lastName", editLastName.getText().toString());
+		    	user.put("department", spinnerDepartments.getSelectedItem().toString());
+
+		    	user.saveInBackground();
+		
 		    	
 		    	Log.d("ProfileActivity", "Profile created");
 		    	

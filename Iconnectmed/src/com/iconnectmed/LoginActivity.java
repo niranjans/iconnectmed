@@ -77,14 +77,50 @@ public class LoginActivity extends Activity {
 		    }
 		});
 		
-		
-		
-		
+//		// ----------------------------	
+//		Button buttonAdd = (Button) findViewById(R.id.buttonAdd);		
+//		buttonAdd.setOnClickListener(new View.OnClickListener() {
+//		    @Override
+//		    public void onClick(View v) {	    	
+//		    	createParseUsers();
+//		    }
+//		});
 		
 	
 		
-		
 	}
+	
+	
+//	private void createParseUsers() {
+//		String username = "test@gmail.com";
+//		String password = "123456";
+//		
+//		for(int i=1;i<51;i++){
+//		
+//			username = Integer.toString(i) + username;
+//			
+//		  	ParseUser user = new ParseUser();
+//	    	user.setUsername(username);
+//	    	user.setEmail(username);
+//	    	user.setPassword(password);
+//	    	
+//	    	try {
+//				user.signUp();
+//				
+//				Toast.makeText(getApplicationContext(), "User created! " + username, 
+//		    			   Toast.LENGTH_LONG).show();
+//			
+//	    	} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//	    	username = "test@gmail.com";
+//			
+//		}
+//    	 
+//
+//		
+//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

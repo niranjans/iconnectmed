@@ -78,9 +78,11 @@ public class ListViewAdapter extends BaseAdapter{
             	
              Intent intent = new Intent(context, ChatActivity.class);
              
-            // intent.putExtra("chatUserEmail", userProfileList.get(position).getEmail());
+             Log.d("ListViewAdapter", "starting chat with username - " + userProfileList.get(position).getUsername());
              
-             intent.putExtra("chatUserEmail", "testsk@test.com");
+             intent.putExtra("chatUsername", userProfileList.get(position).getUsername());
+             
+            //  intent.putExtra("chatUserEmail", "testsk@test.com");
              
              context.startActivity(intent);
             	
